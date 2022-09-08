@@ -27,6 +27,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
+        checkAuthState()
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             try {
@@ -63,9 +64,17 @@ class SignInActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 Log.d("MyLog", "Sign in success")
+                checkAuthState()
             } else {
                 Log.d("MyLog", "Sign in failed")
             }
+        }
+    }
+
+    private fun checkAuthState() {
+        if (auth.currentUser != null) {
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
         }
     }
 }
