@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">ChatApp</string>
     <string name="btn_send">Send message</string>
+    <string name="btn_sign_in">Sign in to Google</string>
+    <string name="btn_sign_out">Sign out</string>
 </resources>
